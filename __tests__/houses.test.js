@@ -4,20 +4,12 @@ const app = require('../lib/app');
 
 describe('House routes', () => {
   it('should insert a house', async() => {
-    const house = {
-      address: 'fake address', 
-      images: ['an image'], 
-      price: '$33093898',
-      lotSQFT: 'lod', 
-      houseSQFT: 'little', 
-      saleStatus: 'sold', 
-      lastSold: '2017', 
-    };
+    
 
     return await request(app)
       .post('/api/v1/houses')
-      .send(house)
-      .then(res => expect(res.body).toEqual({ ...house, id: expect.any(String), images: expect.any(String) }));
+      .send({ url: 'https://www.realtor.com/realestateandhomes-detail/1931-NE-Pacific-St_Portland_OR_97232_M22217-96489' })
+      .then(res => expect(res.body).toEqual({ address: expect.any(String), houseSQFT: expect.any(String), lotSQFT: expect.any(String), lastSold: expect.any(String), saleStatus: expect.any(String), price: expect.any(String), id: expect.any(String), images: expect.any(String) }));
   });
 
   it('should return a list of all houses', async() => {
