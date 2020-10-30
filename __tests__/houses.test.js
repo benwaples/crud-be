@@ -19,4 +19,10 @@ describe('House routes', () => {
       .send(house)
       .then(res => expect(res.body).toEqual({ ...house, id: expect.any(String), images: expect.any(String) }));
   });
+
+  it('should return a list of all houses', async() => {
+    return await request(app)
+      .get('/api/v1/houses')
+      .then(res => expect(res.body.length).toEqual(20));
+  });
 });
