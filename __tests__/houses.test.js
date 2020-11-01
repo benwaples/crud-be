@@ -21,4 +21,22 @@ describe('House routes', () => {
       .get('/api/v1/houses/12')
       .then(res => expect(res.body).toEqual({ id: expect.any(String), address: expect.any(String), images: expect.any(String), price: expect.any(String), lotSQFT: expect.any(String), houseSQFT: expect.any(String), saleStatus: expect.any(String), lastSold: expect.any(String) }));
   });
+
+  it('should update a house given a house object and id via PATCH', async() => {
+    const updatedHouse = {
+      id: 5,
+      address: 'updated fake', 
+      images: ['an image'], 
+      price: '$33093898',
+      lotSQFT: 'lot', 
+      houseSQFT: 'more', 
+      saleStatus: 'pending', 
+      lastSold: '2019', 
+    };
+
+    return await request(app)
+      .patch('/api/v1/houses/5')
+      .send(updatedHouse)
+      .then(res => expect(res.body).toEqual({ ...updatedHouse, id: expect.any(String), images: expect.any(String) }));
+  });
 });
