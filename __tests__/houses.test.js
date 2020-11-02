@@ -39,4 +39,10 @@ describe('House routes', () => {
       .send(updatedHouse)
       .then(res => expect(res.body).toEqual({ ...updatedHouse, id: expect.any(String), images: expect.any(String) }));
   });
+
+  it('should delete a house from a given id via DELETE', async() => {
+    return await request(app)
+      .delete('/api/v1/houses/1')
+      .then(res => expect(res.body).toEqual({ id: expect.any(String), address: expect.any(String), images: expect.any(String), price: expect.any(String), lotSQFT: expect.any(String), houseSQFT: expect.any(String), saleStatus: expect.any(String), lastSold: expect.any(String) }));
+  });
 });
